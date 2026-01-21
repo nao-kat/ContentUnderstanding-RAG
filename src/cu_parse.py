@@ -1,6 +1,11 @@
 """Parser for Azure AI Content Understanding API responses."""
 from typing import Dict, Any, List, Optional
 
+# Time conversion constants
+SECONDS_PER_HOUR = 3600
+SECONDS_PER_MINUTE = 60
+MILLISECONDS_PER_SECOND = 1000
+
 
 class Segment:
     """Represents a video segment/scene."""
@@ -152,7 +157,7 @@ def _time_to_ms(time_str: str) -> int:
         else:
             return 0
         
-        total_ms = (hours * 3600 + minutes * 60 + seconds) * 1000 + ms
+        total_ms = (hours * SECONDS_PER_HOUR + minutes * SECONDS_PER_MINUTE + seconds) * MILLISECONDS_PER_SECOND + ms
         return total_ms
     except (ValueError, AttributeError):
         return 0

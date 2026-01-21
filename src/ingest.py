@@ -1,6 +1,7 @@
 """CLI tool for ingesting videos into the search index."""
 import argparse
 import sys
+import traceback
 from pathlib import Path
 from typing import Optional
 from .cu_client import ContentUnderstandingClient
@@ -167,7 +168,6 @@ def main():
         )
     except Exception as e:
         print(f"\n✗ Error during ingestion: {e}", file=sys.stderr)
-        import traceback
         traceback.print_exc()
         sys.exit(1)
 

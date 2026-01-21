@@ -85,8 +85,8 @@ class SearchIndexManager:
         if not documents:
             return {"succeeded": 0, "failed": 0}
         
-        # Convert documents to dictionaries
-        doc_dicts = [doc.model_dump(exclude_none=True) for doc in documents]
+        # Convert documents to dictionaries, excluding unset fields but keeping None values
+        doc_dicts = [doc.model_dump(exclude_unset=True) for doc in documents]
         
         # Upload documents
         results = self.search_client.upload_documents(documents=doc_dicts)
